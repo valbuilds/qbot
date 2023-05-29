@@ -1,4 +1,6 @@
 {
-    "TOKEN": "token",
-    "CLIENTID": "applicationid"
+    "token": "token-goes-here",
+    "clientId": "client-id-goes-here",
+    "guildId": "guild-id-goes-here",
+    "botName": "bot-name"
 }
