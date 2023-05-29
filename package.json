@@ -1,0 +1,14 @@
+{
+  "name": "queer-bot",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "violetbuilder",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "discord.js": "^14.11.0"
+  }
+}
