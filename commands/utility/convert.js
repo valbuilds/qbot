@@ -181,5 +181,55 @@ module.exports = {
                 return interaction.reply({ embeds: [reply] });
             }
         }
+
+        async function convTemp() {
+            if (unit === `c`) {
+                convTempCel();
+            } else if (unit === `f`) {
+                convTempFar();
+            } else if (unit === `k`) {
+                convTempKel();
+            }
+
+            async function convTempCel() {
+                const far = (value * (9/5)) + 32;
+                const kel = value + 273.15;
+
+                const reply = new EmbedBuilder()
+                    .setTitle(`Converting Celsuis (c)`)
+                    .setDescription(`I was asked to convert ${value} celsius.`)
+                    .addFields(
+                        { name: `In fahrenheit (f)`, value: `${far}` }, { name: `In kelvin (k)`, value: `${kel}` },
+                    )
+                    .setColor(`Blurple`)
+                return interaction.reply({ embeds: [reply] });
+            }
+            async function convTempFar() {
+                const cel = (value - 32) * (5/9);
+                const kel = cel + 273.15;
+                
+                const reply = new EmbedBuilder()
+                    .setTitle(`Converting Fahrenheit (f)`)
+                    .setDescription(`I was asked to convert ${value} fahrenheit.`)
+                    .addFields(
+                        { name: `In celsius (c)`, value: `${cel}` }, { name: `In kelvin (k)`, value: `${kel}` },
+                    )
+                    .setColor(`Blurple`)
+                return interaction.reply({ embeds: [reply] });
+            }
+            async function convTempKel() {
+                const cel = value - 273.15;
+                const far = cel * (9/5) + 32;
+
+                const reply = new EmbedBuilder()
+                    .setTitle(`Converting Kelvin (k)`)
+                    .setDescription(`I was asked to convert ${value} kelvin.`)
+                    .addFields(
+                        { name: `In celsius (c)`, value: `${cel}` }, { name: `In fahrenheit (f))`, value: `${far}` },
+                    )
+                    .setColor(`Blurple`)
+                return interaction.reply({ embeds: [reply] });
+            }
+        }
     }
 }
