@@ -1,5 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder, inlineCode } = require(`discord.js`);
 
+const memberRoleId = `1113826992333279352`;
+const verifyCmdsChannelId = `1113675686398398604`;
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName(`rules`).setDescription(`Refrences the rules.`)
@@ -34,7 +37,32 @@ module.exports = {
         }
 
         async function verifyUser() {
-            return interaction.reply({ content: `Coming soon.`, ephemeral: true })
+            if (interaction.member.roles.cache.some(role => role.id === `${memberRoleId}`)) {
+                alreadyVerified();
+            } else {
+                checkChannel();
+            }
+
+            async function alreadyVerified() {
+                return interaction.reply({ content: `You've already verified.`, ephemeral: true });
+            }
+
+            async function checkChannel() {
+                if (interaction.channel.id === `${verifyCmdsChannelId}`) {
+                    finalizeVerification();
+                } else {
+                    notRightChannel();
+                }
+            }
+
+            async function finalizeVerification() {
+                await interaction.member.roles.add(`${memberRoleId}`);
+                return interaction.reply({ content: `Verified.`, ephemeral: true });
+            }
+            
+            async function notRightChannel() {
+                return interaction.reply({ content: `You aren't in the right channel!\nHead to <#${verifyCmdsChannelId}> and run the command again.`, ephemeral: true })
+            }
         }
     }
 }
