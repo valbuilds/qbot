@@ -13,8 +13,6 @@ module.exports = {
     async execute(interaction) {
         const sub = interaction.options.getSubcommand();
 
-        const member = interaction.member;
-
         if (sub === `full`) {
             fullMessage();
         } else if (sub === `verify`) {
